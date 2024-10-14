@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/13 19:31:22 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:25:21 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,26 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+# ifndef DIE
+#  define DIE 1
+# endif
+
+# ifndef FIN
+#  define FIN 2
+# endif
+
 typedef struct s_philo
 {
+	int				num;
 	int				id;
-	int				state;
+	int				stateus;
 	int				die_time;
 	int				eat_time;
 	int				sleep_time;
-	long long		fin_eat_time;
+	long long		start_time;
+	long long		last_eat_time;
+	int				must_eat;
+	int				eat_count;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 }	t_philo;

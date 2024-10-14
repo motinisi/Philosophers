@@ -6,7 +6,7 @@
 #    By: timanish <timanish@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/30 15:54:45 by timanish          #+#    #+#              #
-#    Updated: 2024/10/11 20:07:36 by timanish         ###   ########.fr        #
+#    Updated: 2024/10/14 17:22:49 by timanish         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ CFRAGS = -Wall -Wextra -Werror
 NAME = philo
 SRCS = 	main.c\
 		ft_atoi.c\
-
 
 OBJS = $(SRCS:.c=.o)
 
