@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/14 16:25:21 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:37:51 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ typedef struct s_philo
 	long long		last_eat_time;
 	int				must_eat;
 	int				eat_count;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*left_forks;
+	pthread_mutex_t	*right_forks;
 }	t_philo;
 
 static size_t	ft_strlen_n(const char *str);

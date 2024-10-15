@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 19:32:22 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/14 20:35:35 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:28:08 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 // 	int				sleep_time;
 // 	long long		start_time;
 // 	long long		last_eat_time;
-// 	pthread_mutex_t	*left_fork;
-// 	pthread_mutex_t	*right_fork;
+// 	pthread_mutex_t	*left_forks;
+// 	pthread_mutex_t	*right_forks;
 // }	t_philo;
 
 // void	philo_state(void *arg)
@@ -58,37 +58,46 @@ void	*philo_routine(void *data)
 	{
 		if (p_data->id % 2 == 0)
 		{
-			pthread_mutex_lock(p_data->left_fork);
+			pthread_mutex_lock(p_data->left_forks);
 			if (p_data->stateus == DIE)
 				return (0);
 			else
-				printf("%lld %d has taken a fork\n", get_time() - base, p_data->id);
-			pthread_mutex_lock(p_data->right_fork);
+				printf("%lld %d has taken a forks left\n",
+					get_time() - base, p_data->id);
+			pthread_mutex_lock(p_data->right_forks);
 			if (p_data->stateus == DIE)
 				return (0);
 			else
-				printf("%lld %d has taken a fork\n", get_time() - base, p_data->id);
+				printf("%lld %d has taken a forks right\n",
+					get_time() - base, p_data->id);
 		}
 		else
 		{
-			pthread_mutex_lock(p_data->right_fork);
-			if (p_data->stateus == DIE)
-				return (0);
-			printf("%lld %d has taken a fork\n", get_time() - base, p_data->id);
-			pthread_mutex_lock(p_data->left_fork);
+			usleep (200);
+			pthread_mutex_lock(p_data->right_forks);
 			if (p_data->stateus == DIE)
 				return (0);
 			else
-				printf("%lld %d has taken a fork\n", get_time() - base, p_data->id);
+				printf("%lld %d has taken a forks right\n",
+					get_time() - base, p_data->id);
+			pthread_mutex_lock(p_data->left_forks);
+			if (p_data->stateus == DIE)
+				return (0);
+			else
+				printf("%lld %d has taken a forks left\n",
+					get_time() - base, p_data->id);
 		}
 		if (p_data->stateus == DIE)
 			return (0);
 		else
-			printf("%lld %d is eating\n", get_time() - base, p_data->id);
+		{
+			p_data->last_eat_time = get_time() - base;
+			printf("%lld %d is eating\n", p_data->last_eat_time, p_data->id);
+		}
+		// printf("last eat time !!!!! : %lld , id : %d\n", p_data->last_eat_time, p_data->id);
 		usleep(1000 * p_data->eat_time);
-		p_data->last_eat_time = get_time();
-		pthread_mutex_unlock(p_data->left_fork);
-		pthread_mutex_unlock(p_data->right_fork);
+		pthread_mutex_unlock(p_data->left_forks);
+		pthread_mutex_unlock(p_data->right_forks);
 		p_data->eat_count ++;
 		if (p_data->stateus == DIE || p_data->eat_count == p_data->must_eat)
 			return (0);
@@ -114,16 +123,14 @@ void	monitoring_philo(t_philo *p_data)
 	p_num = p_data->num;
 	while (1)
 	{
-		present_time = get_time();
 		i = 0;
 		while (i < p_num)
 		{
+			present_time = get_time() - p_data[i].start_time;
 			// printf("last eat time %lld\n", p_data[i].last_eat_time);
 			if (present_time - p_data[i].last_eat_time > p_data[i].die_time)
+			// if (p_data[i].last_eat_time > p_data[i].die_time)
 			{
-				// p_data[i].stateus = DIE;
-				// p_data->stateus = DIE;
-				tmp = 0;
 				tmp = i;
 				i = 0;
 				while (i < p_num)
@@ -131,8 +138,7 @@ void	monitoring_philo(t_philo *p_data)
 					p_data[i].stateus = DIE;
 					i ++;
 				}
-				printf("%lld %d died\n", (present_time - p_data[tmp].start_time),
-					p_data[tmp].id);
+				printf("%lld %d died\n", present_time, p_data[tmp].id);
 				return ;
 			}
 			i ++;
@@ -155,53 +161,58 @@ int	main(int argc, char **argv)
 {
 	t_philo			*p_data;
 	pthread_t		*p_pthread;
-	pthread_mutex_t	*fork;
+	pthread_mutex_t	*forks;
 	pthread_t		monitoring_thread;
+	int				p_all;
 	int				i;
 
 	p_data = (t_philo *)malloc(sizeof(t_philo) * ft_atoi(argv[1]));
-	p_data->num = ft_atoi(argv[1]);
-	p_pthread = (pthread_t *)malloc(sizeof(pthread_t) * p_data->num);
-	fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * p_data->num);
+	p_all = ft_atoi(argv[1]);
+	p_pthread = (pthread_t *)malloc(sizeof(pthread_t) * ft_atoi(argv[1]));
+	forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * ft_atoi(argv[1]));
 	i = 0;
-	while (i < p_data->num)
+	while (i < p_all)
 	{
+		p_data[i].num = ft_atoi(argv[1]);
 		p_data[i].id = i + 1;
 		p_data[i].start_time = get_time();
 		p_data[i].die_time = ft_atoi(argv[2]);
 		p_data[i].eat_time = ft_atoi(argv[3]);
 		p_data[i].sleep_time = ft_atoi(argv[4]);
 		p_data[i].must_eat = ft_atoi(argv[5]);
-		pthread_mutex_init(&fork[i], NULL);
-		p_data[i].left_fork = &fork[i];
-		p_data[i].right_fork = &fork[(i + 1) % p_data->num];
+		pthread_mutex_init(&forks[i], NULL);
+		p_data[i].left_forks = &forks[i];
+		p_data[i].right_forks = &forks[(i + 1) % p_all];
 		p_data[i].last_eat_time = get_time();
 		i ++;
 	}
 	i = 0;
-	while (i < p_data->num)
+	while (i < p_all)
 	{
 		pthread_create(&p_pthread[i], NULL, philo_routine, &p_data[i]);
 		i ++;
 	}
 	pthread_create(&monitoring_thread, NULL, (void *)monitoring_philo, p_data);
 	i = 0;
-	pthread_join(monitoring_thread, NULL);
 	// if (p_data->stateus == DIE)
 	// {
-	// 	while (i < p_data->num)
+	// 	while (i < p_all)
 	// 	{
 	// 		p_data[i].stateus = DIE;
 	// 		i ++;
 	// 	}
 	// }
 	i = 0;
-	while (i < p_data->num)
+	while (i < p_all)
 	{
 		pthread_join(p_pthread[i], NULL);
 		i ++;
 	}
+	pthread_join(monitoring_thread, NULL);
 	free(p_pthread);
-	free(fork);
+	free(forks);
 	free(p_data);
 }
+
+
+// ./philo 3 300 100 100 4 この引数バグる
