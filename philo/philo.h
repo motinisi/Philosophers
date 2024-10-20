@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/15 17:37:51 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:58:50 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+# ifndef NONE
+#  define NONE -1
+# endif
 
 # ifndef DIE
 #  define DIE 1
@@ -31,7 +35,7 @@ typedef struct s_philo
 {
 	int				num;
 	int				id;
-	int				stateus;
+	int				status;
 	int				die_time;
 	int				eat_time;
 	int				sleep_time;

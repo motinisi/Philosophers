@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 19:32:22 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/15 20:28:08 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/20 19:03:50 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ long long	get_time(void)
 
 // }
 
+// void	ft_usleep(int time)
+// {
+// 	int	i;
+
+// 	i = 1001;
+// 	while (--i)
+// 		usleep(1 * time);
+// }
+
 void	*philo_routine(void *data)
 {
 	t_philo			*p_data;
@@ -54,18 +63,19 @@ void	*philo_routine(void *data)
 	base = p_data->start_time;
 	p_data->eat_count = 0;
 	// printf("philo_routine : so far ok\n");
+	
 	while (1)
 	{
 		if (p_data->id % 2 == 0)
 		{
 			pthread_mutex_lock(p_data->left_forks);
-			if (p_data->stateus == DIE)
+			if (p_data->status == DIE)
 				return (0);
 			else
 				printf("%lld %d has taken a forks left\n",
 					get_time() - base, p_data->id);
 			pthread_mutex_lock(p_data->right_forks);
-			if (p_data->stateus == DIE)
+			if (p_data->status == DIE)
 				return (0);
 			else
 				printf("%lld %d has taken a forks right\n",
@@ -73,38 +83,38 @@ void	*philo_routine(void *data)
 		}
 		else
 		{
-			usleep (200);
+			// usleep (200);
 			pthread_mutex_lock(p_data->right_forks);
-			if (p_data->stateus == DIE)
+			if (p_data->status == DIE)
 				return (0);
 			else
 				printf("%lld %d has taken a forks right\n",
 					get_time() - base, p_data->id);
 			pthread_mutex_lock(p_data->left_forks);
-			if (p_data->stateus == DIE)
+			if (p_data->status == DIE)
 				return (0);
 			else
 				printf("%lld %d has taken a forks left\n",
 					get_time() - base, p_data->id);
 		}
-		if (p_data->stateus == DIE)
+		p_data->last_eat_time = get_time() - base;
+		if (p_data->status == DIE)
 			return (0);
 		else
 		{
-			p_data->last_eat_time = get_time() - base;
 			printf("%lld %d is eating\n", p_data->last_eat_time, p_data->id);
 		}
-		// printf("last eat time !!!!! : %lld , id : %d\n", p_data->last_eat_time, p_data->id);
 		usleep(1000 * p_data->eat_time);
+		//奇数の時、最後のidを持つ哲学者はフォークを右がら離さなければならない。
 		pthread_mutex_unlock(p_data->left_forks);
 		pthread_mutex_unlock(p_data->right_forks);
 		p_data->eat_count ++;
-		if (p_data->stateus == DIE || p_data->eat_count == p_data->must_eat)
+		if (p_data->status == DIE || p_data->eat_count == p_data->must_eat)
 			return (0);
 		else
 			printf("%lld %d is sleeping\n", get_time() - base, p_data->id);
 		usleep(1000 * p_data->sleep_time);
-		if (p_data->stateus == DIE)
+		if (p_data->status == DIE)
 			return (0);
 		else
 			printf("%lld %d is thinking\n", get_time() - base, p_data->id);
@@ -135,7 +145,7 @@ void	monitoring_philo(t_philo *p_data)
 				i = 0;
 				while (i < p_num)
 				{
-					p_data[i].stateus = DIE;
+					p_data[i].status = DIE;
 					i ++;
 				}
 				printf("%lld %d died\n", present_time, p_data[tmp].id);
@@ -179,7 +189,10 @@ int	main(int argc, char **argv)
 		p_data[i].die_time = ft_atoi(argv[2]);
 		p_data[i].eat_time = ft_atoi(argv[3]);
 		p_data[i].sleep_time = ft_atoi(argv[4]);
-		p_data[i].must_eat = ft_atoi(argv[5]);
+		if (argv[5])
+			p_data[i].must_eat = ft_atoi(argv[5]);
+		else
+			p_data[i].must_eat = NONE;
 		pthread_mutex_init(&forks[i], NULL);
 		p_data[i].left_forks = &forks[i];
 		p_data[i].right_forks = &forks[(i + 1) % p_all];
@@ -194,11 +207,11 @@ int	main(int argc, char **argv)
 	}
 	pthread_create(&monitoring_thread, NULL, (void *)monitoring_philo, p_data);
 	i = 0;
-	// if (p_data->stateus == DIE)
+	// if (p_data->status == DIE)
 	// {
 	// 	while (i < p_all)
 	// 	{
-	// 		p_data[i].stateus = DIE;
+	// 		p_data[i].status = DIE;
 	// 		i ++;
 	// 	}
 	// }
