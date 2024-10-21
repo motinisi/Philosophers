@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 19:32:22 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/20 19:03:50 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:36:16 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	*philo_routine(void *data)
 	p_data = (t_philo *)data;
 	base = p_data->start_time;
 	p_data->eat_count = 0;
-	// printf("philo_routine : so far ok\n");
-	
 	while (1)
 	{
 		if (p_data->id % 2 == 0)
@@ -83,7 +81,7 @@ void	*philo_routine(void *data)
 		}
 		else
 		{
-			// usleep (200);
+			usleep (200);
 			pthread_mutex_lock(p_data->right_forks);
 			if (p_data->status == DIE)
 				return (0);
@@ -105,7 +103,6 @@ void	*philo_routine(void *data)
 			printf("%lld %d is eating\n", p_data->last_eat_time, p_data->id);
 		}
 		usleep(1000 * p_data->eat_time);
-		//奇数の時、最後のidを持つ哲学者はフォークを右がら離さなければならない。
 		pthread_mutex_unlock(p_data->left_forks);
 		pthread_mutex_unlock(p_data->right_forks);
 		p_data->eat_count ++;
@@ -137,9 +134,7 @@ void	monitoring_philo(t_philo *p_data)
 		while (i < p_num)
 		{
 			present_time = get_time() - p_data[i].start_time;
-			// printf("last eat time %lld\n", p_data[i].last_eat_time);
 			if (present_time - p_data[i].last_eat_time > p_data[i].die_time)
-			// if (p_data[i].last_eat_time > p_data[i].die_time)
 			{
 				tmp = i;
 				i = 0;
