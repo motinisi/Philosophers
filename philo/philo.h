@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/18 17:58:50 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:54:17 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,26 @@ typedef struct s_philo
 	int				eat_count;
 	pthread_mutex_t	*left_forks;
 	pthread_mutex_t	*right_forks;
+	pthread_mutex_t	status_mutex;
 }	t_philo;
 
-static size_t	ft_strlen_n(const char *str);
 long			ft_atoi(const char *str);
+long long		get_time(void);
+int				print_messege(char *messege, t_philo *p_data);
+void			pick_up_forks(t_philo *p_data);
+void			philo_eat(t_philo *p_data);
+void			philo_sleep(t_philo *p_data);
+void			philo_think(t_philo *p_data);
+void			*philo_routine(void *data);
+int				check_death(t_philo *p_data);
+int				check_all_eaten(t_philo *p_data);
+void			monitoring_philo(t_philo *p_data);
+void			init_philosophers(t_philo **p_data, int argc, char **argv,
+					pthread_mutex_t **forks);
+void			create_philosopher_threads(pthread_t **p_pthread,
+					t_philo *p_data);
+void			join_philosopher_threads(pthread_t *p_pthread, t_philo *p_data);
+void			cleanup(pthread_t *p_pthread,
+					pthread_mutex_t *forks, t_philo *p_data);
+
 #endif
