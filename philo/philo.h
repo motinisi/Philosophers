@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/24 17:54:17 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:20:10 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,20 @@
 #  define DIE 1
 # endif
 
+# ifndef EAT
+#  define EAT 2
+# endif
+
+# ifndef SLEEP
+#  define SLEEP 3
+# endif
+
+# ifndef THINK
+#  define THINK 4
+# endif
+
 # ifndef FIN
-#  define FIN 2
+#  define FIN 5
 # endif
 
 typedef struct s_philo
@@ -43,6 +55,7 @@ typedef struct s_philo
 	long long		last_eat_time;
 	int				must_eat;
 	int				eat_count;
+	struct s_philo	*prev;
 	pthread_mutex_t	*left_forks;
 	pthread_mutex_t	*right_forks;
 	pthread_mutex_t	status_mutex;
@@ -51,7 +64,7 @@ typedef struct s_philo
 long			ft_atoi(const char *str);
 long long		get_time(void);
 int				print_messege(char *messege, t_philo *p_data);
-void			pick_up_forks(t_philo *p_data);
+void			even_pick_up_forks(t_philo *p_data);
 void			philo_eat(t_philo *p_data);
 void			philo_sleep(t_philo *p_data);
 void			philo_think(t_philo *p_data);

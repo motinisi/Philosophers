@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:47:43 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/24 18:07:57 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:18:15 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	init_philosopher_data(t_philo **p_data, int p_all, char **argv,
 		(*p_data)[i].right_forks = &forks[(i + 1) % p_all];
 		(*p_data)[i].last_eat_time = get_time();
 		(*p_data)[i].status = 0;
+		if (i != 0)
+			(*p_data)[i].prev = &(*p_data)[i - 1];
 		i ++;
 	}
 }

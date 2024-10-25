@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:01:58 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/24 23:10:40 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:49:01 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,25 @@ void	even_pick_up_forks(t_philo *p_data)
 void	add_pick_up_forks(t_philo *p_data)
 {
 	long long	base;
+	t_philo		*prev;
 
 	base = p_data->start_time;
-	
+	prev = p_data->prev;
+	if (p_data->id % 2 != 0)
+	{
+		usleep (1000 * (p_data->eat_time / (p_data->num / 2))
+			* (p_data->id / 2));
+		pthread_mutex_lock(p_data->left_forks);
+		if (print_messege("has taken a fork left\n", p_data))
+			return ;
+		pthread_mutex_lock(p_data->right_forks);
+		if (print_messege("has taken a fork right\n", p_data))
+			return ;
+	}
+	else
+	{
+		prev->
+	}
 }
 
 int	check_death(t_philo *p_data)
