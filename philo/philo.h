@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nisi <nisi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/26 10:54:05 by nisi             ###   ########.fr       */
+/*   Updated: 2024/10/26 19:04:49 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,12 @@ typedef struct s_philo
 long			ft_atoi(const char *str);
 long long		get_time(void);
 int				print_messege(char *messege, t_philo *p_data);
-void			even_pick_up_forks(t_philo *p_data);
-void			odd_pick_up_forks(t_philo *p_data);
+void			pick_up_forks(t_philo *p_data);
 void			philo_eat(t_philo *p_data);
 void			philo_sleep(t_philo *p_data);
 void			philo_think(t_philo *p_data);
 void			*philo_routine(void *data);
-int				check_death(t_philo *p_data);
+int				check_death(t_philo *p_data, int p_num);
 int				check_all_eaten(t_philo *p_data);
 void			monitoring_philo(t_philo *p_data);
 void			init_philosophers(t_philo **p_data, int argc, char **argv,
