@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:47:43 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/26 19:32:22 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/26 20:24:38 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	init_philosopher_data(t_philo **p_data, int p_all, char **argv,
 	}
 }
 
-void	init_philosophers(t_philo **p_data, int argc, char **argv,
+int	init_philosophers(t_philo **p_data, int argc, char **argv,
 			pthread_mutex_t **forks)
 {
 	int	p_all;
@@ -61,12 +61,15 @@ void	init_philosophers(t_philo **p_data, int argc, char **argv,
 	if (argc < 5)
 	{
 		printf("argment error\n");
-		return ;
+		return (1);
 	}
-	p_all = atoi(argv[1]);
+	p_all = ft_atoi(argv[1]);
+	if (p_all < 0)
+		return (1);
 	*p_data = (t_philo *)malloc(sizeof(t_philo) * p_all);
 	init_forks(forks, p_all);
 	init_philosopher_data(p_data, p_all, argv, *forks);
+	return (0);
 }
 
 void	create_philosopher_threads(pthread_t **p_pthread, t_philo *p_data)
