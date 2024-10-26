@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nisi <nisi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:55:21 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/25 15:19:44 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/26 10:54:40 by nisi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void	*philo_routine(void *data)
 	p_data->eat_count = 0;
 	while (1)
 	{
-		even_pick_up_forks(p_data);
+		if (p_data->num % 2 == 0)
+			even_pick_up_forks(p_data);
+		else
+			odd_pick_up_forks(p_data);
 		if (p_data->status == DIE)
 			return (0);
 		philo_eat(p_data);

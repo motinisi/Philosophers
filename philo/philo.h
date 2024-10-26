@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nisi <nisi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/25 17:20:10 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/26 10:54:05 by nisi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ long			ft_atoi(const char *str);
 long long		get_time(void);
 int				print_messege(char *messege, t_philo *p_data);
 void			even_pick_up_forks(t_philo *p_data);
+void			odd_pick_up_forks(t_philo *p_data);
 void			philo_eat(t_philo *p_data);
 void			philo_sleep(t_philo *p_data);
 void			philo_think(t_philo *p_data);

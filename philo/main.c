@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nisi <nisi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:01:58 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/25 17:49:01 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/26 11:01:12 by nisi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	even_pick_up_forks(t_philo *p_data)
 	}
 }
 
-void	add_pick_up_forks(t_philo *p_data)
+void	odd_pick_up_forks(t_philo *p_data)
 {
 	long long	base;
 	t_philo		*prev;
@@ -80,7 +80,18 @@ void	add_pick_up_forks(t_philo *p_data)
 	}
 	else
 	{
-		prev->
+		// printf("\nid : %d\n\n", prev->id);
+		// printf("\nstatus : %d\n\n", prev->status);
+		
+		usleep(1000 * p_data->eat_time);
+		// usleep(1000 * (p_data->eat_time + (p_data->eat_time / p_data->num) *
+		// 	((p_data->id - 1) / 2)));
+		pthread_mutex_lock(p_data->left_forks);
+		if (print_messege("has taken a fork left\n", p_data))
+			return ;
+		pthread_mutex_lock(p_data->right_forks);
+		if (print_messege("has taken a fork right\n", p_data))
+			return ;
 	}
 }
 
