@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:55:21 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/26 19:01:59 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/26 19:51:00 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,8 @@ void	philo_eat(t_philo *p_data)
 	if (p_data->status == DIE)
 		return ;
 	else
-	{
 		printf("%lld %d is eating\n", get_time() - base, p_data->id);
-		p_data->status = EAT;
-	}
 	usleep(1000 * p_data->eat_time);
-	p_data->status = SLEEP;
 	pthread_mutex_unlock(p_data->left_forks);
 	pthread_mutex_unlock(p_data->right_forks);
 	p_data->eat_count++;
@@ -45,7 +41,6 @@ void	philo_sleep(t_philo *p_data)
 	else
 		printf("%lld %d is sleeping\n", get_time() - base, p_data->id);
 	usleep(1000 * p_data->sleep_time);
-	p_data->status = THINK;
 }
 
 void	philo_think(t_philo *p_data)
@@ -86,13 +81,16 @@ void	*philo_routine(void *data)
 		pick_up_forks(p_data);
 		if (p_data->status == DIE)
 			return (0);
-		philo_eat(p_data);
+		else
+			philo_eat(p_data);
 		if (p_data->status == DIE || p_data->status == FIN)
 			return (0);
-		philo_sleep(p_data);
+		else
+			philo_sleep(p_data);
 		if (p_data->status == DIE)
 			return (0);
-		philo_think(p_data);
+		else
+			philo_think(p_data);
 	}
 	return (0);
 }

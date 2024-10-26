@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:06:11 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/26 19:08:16 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/26 19:43:48 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	check_death(t_philo *p_data, int p_num)
 		if (present_time - p_data[i].last_eat_time > p_data[i].die_time
 			&& p_data->status != FIN)
 		{
+			p_data[i].status = DIE;
 			tmp = i;
 			i = 0;
 			while (i < p_num)
