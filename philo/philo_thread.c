@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:47:43 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/26 20:24:38 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:34:48 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,18 @@ void	init_philosopher_data(t_philo **p_data, int p_all, char **argv,
 		(*p_data)[i].num = p_all;
 		(*p_data)[i].id = i + 1;
 		(*p_data)[i].start_time = get_time();
-		(*p_data)[i].die_time = atoi(argv[2]);
-		(*p_data)[i].eat_time = atoi(argv[3]);
-		(*p_data)[i].sleep_time = atoi(argv[4]);
+		(*p_data)[i].die_time = ft_atoi(argv[2]);
+		(*p_data)[i].eat_time = ft_atoi(argv[3]);
+		(*p_data)[i].sleep_time = ft_atoi(argv[4]);
 		if (argv[5])
-			(*p_data)[i].must_eat = atoi(argv[5]);
+			(*p_data)[i].must_eat = ft_atoi(argv[5]);
 		else
 			(*p_data)[i].must_eat = NONE;
 		(*p_data)[i].left_forks = &forks[i];
 		(*p_data)[i].right_forks = &forks[(i + 1) % p_all];
 		(*p_data)[i].last_eat_time = get_time();
 		(*p_data)[i].status = 0;
-		if (i != 0)
-			(*p_data)[i].prev = &(*p_data)[i - 1];
+		pthread_mutex_init(&(*p_data)[i].status_mutex, NULL);
 		i ++;
 	}
 }
@@ -64,8 +63,6 @@ int	init_philosophers(t_philo **p_data, int argc, char **argv,
 		return (1);
 	}
 	p_all = ft_atoi(argv[1]);
-	if (p_all < 0)
-		return (1);
 	*p_data = (t_philo *)malloc(sizeof(t_philo) * p_all);
 	init_forks(forks, p_all);
 	init_philosopher_data(p_data, p_all, argv, *forks);

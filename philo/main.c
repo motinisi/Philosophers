@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:01:58 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/26 20:07:46 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:35:33 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int	main(int argc, char **argv)
 	pthread_mutex_t	*forks;
 	pthread_t		monitoring_thread;
 
-	if (init_philosophers(&p_data, argc, argv, &forks))
+	if (argment_check(argv))
 		return (0);
+	init_philosophers(&p_data, argc, argv, &forks);
 	create_philosopher_threads(&p_pthread, p_data);
 	pthread_create(&monitoring_thread, NULL, (void *)monitoring_philo, p_data);
 	join_philosopher_threads(p_pthread, p_data);

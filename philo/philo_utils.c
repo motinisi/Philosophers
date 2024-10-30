@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:15:16 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/26 19:15:48 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:37:02 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,24 @@ void	pick_up_forks(t_philo *p_data)
 	}
 }
 
+int	argment_check(char **argv)
+{
+	size_t	i;
+	long	flag;
+
+	i = 0;
+	while (argv[++i])
+	{
+		flag = ft_atoi(argv[i]);
+		if (flag < 0)
+		{
+			printf("philo_number is incorect\n");
+			return (1);
+		}
+	}
+	return (0);
+}
+
 void	cleanup(pthread_t *p_pthread, pthread_mutex_t *forks, t_philo *p_data)
 {
 	int	p_all;
@@ -69,6 +87,7 @@ void	cleanup(pthread_t *p_pthread, pthread_mutex_t *forks, t_philo *p_data)
 	while (i < p_all)
 	{
 		pthread_mutex_destroy(&forks[i]);
+		pthread_mutex_destroy(&p_data[i].status_mutex);
 		i ++;
 	}
 	free(p_pthread);

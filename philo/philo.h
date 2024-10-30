@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/26 20:06:58 by timanish         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:33:44 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_philo
 	long long		last_eat_time;
 	int				must_eat;
 	int				eat_count;
-	struct s_philo	*prev;
 	pthread_mutex_t	*left_forks;
 	pthread_mutex_t	*right_forks;
 	pthread_mutex_t	status_mutex;
@@ -79,5 +78,6 @@ void			create_philosopher_threads(pthread_t **p_pthread,
 void			join_philosopher_threads(pthread_t *p_pthread, t_philo *p_data);
 void			cleanup(pthread_t *p_pthread,
 					pthread_mutex_t *forks, t_philo *p_data);
+int				argment_check(char **argv);
 
 #endif
