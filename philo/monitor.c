@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:06:11 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/26 19:43:48 by timanish         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:45:22 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ int	check_death(t_philo *p_data, int p_num)
 	i = 0;
 	while (i < p_num)
 	{
+		pthread_mutex_lock(&p_data[i].status_mutex);
 		present_time = get_time() - p_data[i].start_time;
 		if (present_time - p_data[i].last_eat_time > p_data[i].die_time
 			&& p_data->status != FIN)
 		{
 			p_data[i].status = DIE;
 			tmp = i;
-			i = 0;
-			while (i < p_num)
-			{
+			i = -1;
+			while (++i < p_num)
 				p_data[i].status = DIE;
-				i++;
-			}
 			printf("%lld %d died\n", present_time, p_data[tmp].id);
+			pthread_mutex_unlock(&p_data[tmp].status_mutex);
 			return (1);
 		}
+		pthread_mutex_unlock(&p_data[i].status_mutex);
 		i++;
 	}
 	return (0);
@@ -52,8 +52,10 @@ int	check_all_eaten(t_philo *p_data)
 	fin_eat_num = 0;
 	while (i < p_num)
 	{
+		pthread_mutex_lock(&p_data[i].status_mutex);
 		if (p_data[i].eat_count == p_data[i].must_eat)
 			fin_eat_num++;
+		pthread_mutex_unlock(&p_data[i].status_mutex);
 		i++;
 	}
 	if (fin_eat_num == p_num)
