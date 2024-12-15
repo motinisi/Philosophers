@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:47:43 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 19:15:46 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:12:16 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	init_philosopher_data(t_philo **p_data, char **argv,
 int	init_philosophers(t_philo **p_data, int argc, char **argv,
 			pthread_mutex_t **forks)
 {
-	int	p_all;
-	pthread_mutex_t *print_mutex;
+	int				p_all;
+	pthread_mutex_t	*print_mutex;
 
 	print_mutex = malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(print_mutex, NULL);

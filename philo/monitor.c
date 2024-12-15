@@ -6,11 +6,23 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:06:11 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 20:04:17 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:09:37 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	status_check(t_philo *p_data)
+{
+	pthread_mutex_lock(&p_data->status_mutex);
+	if (p_data->status == DIE || p_data->status == FIN)
+	{
+		pthread_mutex_unlock(&p_data->status_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&p_data->status_mutex);
+	return (0);
+}
 
 void	set_all_die(t_philo *p_data, int p_num)
 {

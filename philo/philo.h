@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 18:58:50 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:09:57 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ void			join_philosopher_threads(pthread_t *p_pthread, t_philo *p_data);
 void			cleanup(pthread_t *p_pthread,
 					pthread_mutex_t *forks, t_philo *p_data);
 int				argment_check(char **argv);
+int				status_check(t_philo *p_data);
 
 #endif

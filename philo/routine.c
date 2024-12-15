@@ -6,12 +6,11 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:55:21 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 18:46:38 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:11:59 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 void	philo_eat(t_philo *p_data)
 {
@@ -62,22 +61,9 @@ void	stay_philo(t_philo *p_data)
 	pthread_mutex_unlock(&p_data->status_mutex);
 }
 
-int	status_check(t_philo *p_data)
-{
-	pthread_mutex_lock(&p_data->status_mutex);
-	if (p_data->status == DIE || p_data->status == FIN)
-	{
-		pthread_mutex_unlock(&p_data->status_mutex);
-		return (1);
-	}
-	pthread_mutex_unlock(&p_data->status_mutex);
-	return (0);
-}
-
 void	*philo_routine(void *data)
 {
 	t_philo		*p_data;
-
 
 	p_data = (t_philo *)data;
 	p_data->eat_count = 0;
