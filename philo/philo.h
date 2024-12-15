@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/11/05 17:43:16 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:46:55 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_forks;
 	pthread_mutex_t	*right_forks;
 	pthread_mutex_t	status_mutex;
+	pthread_mutex_t	print_mutex;
 }	t_philo;
 
 long			ft_atoi(const char *str);

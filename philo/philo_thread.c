@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:47:43 by timanish          #+#    #+#             */
-/*   Updated: 2024/11/05 17:43:41 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 15:03:12 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_philosopher_data(t_philo **p_data, int p_all, char **argv,
 		(*p_data)[i].last_eat_time = get_time();
 		(*p_data)[i].status = 0;
 		pthread_mutex_init(&(*p_data)[i].status_mutex, NULL);
+		pthread_mutex_init(&(*p_data)[i].print_mutex, NULL);
 		i ++;
 	}
 }
