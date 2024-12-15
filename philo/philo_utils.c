@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:15:16 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 16:10:49 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:18:31 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	print_messege(char *messege, t_philo *p_data)
 	}
 	else
 	{
-		pthread_mutex_lock(&p_data->print_mutex);
+		pthread_mutex_lock(p_data->print_mutex);
 		printf("%lld %d %s", get_time() - base, p_data->id, messege);
-		pthread_mutex_unlock(&p_data->print_mutex);
+		pthread_mutex_unlock(p_data->print_mutex);
 	}
 	pthread_mutex_unlock(&p_data->status_mutex);
 	return (0);
@@ -45,9 +45,6 @@ int	print_messege(char *messege, t_philo *p_data)
 
 void	pick_up_forks(t_philo *p_data)
 {
-	long long	base;
-
-	base = p_data->start_time;
 	if (p_data->id % 2 == 0)
 	{
 		pthread_mutex_lock(p_data->left_forks);
@@ -91,14 +88,15 @@ void	cleanup(pthread_t *p_pthread, pthread_mutex_t *forks, t_philo *p_data)
 	int	p_all;
 	int	i;
 
+	pthread_mutex_lock(&p_data->status_mutex);
 	p_all = p_data[0].num;
+	pthread_mutex_unlock(&p_data->status_mutex);
 	i = 0;
 	while (i < p_all)
 	{
-		// pthread_mutex_unlock(&forks[i]);
 		pthread_mutex_destroy(&forks[i]);
 		pthread_mutex_destroy(&p_data[i].status_mutex);
-		pthread_mutex_destroy(&p_data[i].print_mutex);
+		pthread_mutex_destroy(p_data[i].print_mutex);
 		i ++;
 	}
 	free(p_pthread);

@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:47:43 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 15:03:12 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:15:46 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	init_forks(pthread_mutex_t **forks, int p_all)
 	}
 }
 
-void	init_philosopher_data(t_philo **p_data, int p_all, char **argv,
-			pthread_mutex_t *forks)
+void	init_philosopher_data(t_philo **p_data, char **argv,
+			pthread_mutex_t *forks, pthread_mutex_t *print_mutex)
 {
 	int	i;
 
 	i = 0;
-	while (i < p_all)
+	while (i < ft_atoi(argv[1]))
 	{
-		(*p_data)[i].num = p_all;
+		(*p_data)[i].num = ft_atoi(argv[1]);
 		(*p_data)[i].id = i + 1;
 		(*p_data)[i].start_time = get_time();
 		(*p_data)[i].die_time = ft_atoi(argv[2]);
@@ -44,11 +44,11 @@ void	init_philosopher_data(t_philo **p_data, int p_all, char **argv,
 		else
 			(*p_data)[i].must_eat = NONE;
 		(*p_data)[i].left_forks = &forks[i];
-		(*p_data)[i].right_forks = &forks[(i + 1) % p_all];
+		(*p_data)[i].right_forks = &forks[(i + 1) % ft_atoi(argv[1])];
 		(*p_data)[i].last_eat_time = get_time();
 		(*p_data)[i].status = 0;
+		(*p_data)[i].print_mutex = print_mutex;
 		pthread_mutex_init(&(*p_data)[i].status_mutex, NULL);
-		pthread_mutex_init(&(*p_data)[i].print_mutex, NULL);
 		i ++;
 	}
 }
@@ -57,7 +57,10 @@ int	init_philosophers(t_philo **p_data, int argc, char **argv,
 			pthread_mutex_t **forks)
 {
 	int	p_all;
+	pthread_mutex_t *print_mutex;
 
+	print_mutex = malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(print_mutex, NULL);
 	if (argc < 5)
 	{
 		printf("argment error\n");
@@ -66,7 +69,7 @@ int	init_philosophers(t_philo **p_data, int argc, char **argv,
 	p_all = ft_atoi(argv[1]);
 	*p_data = (t_philo *)malloc(sizeof(t_philo) * p_all);
 	init_forks(forks, p_all);
-	init_philosopher_data(p_data, p_all, argv, *forks);
+	init_philosopher_data(p_data, argv, *forks, print_mutex);
 	return (0);
 }
 

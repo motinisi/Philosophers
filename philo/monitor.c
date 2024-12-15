@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:06:11 by timanish          #+#    #+#             */
-/*   Updated: 2024/11/05 17:45:22 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:25:10 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	check_death(t_philo *p_data, int p_num)
 			while (++i < p_num)
 				p_data[i].status = DIE;
 			printf("%lld %d died\n", present_time, p_data[tmp].id);
+			// print_messege("died\n", &p_data[tmp]);
 			pthread_mutex_unlock(&p_data[tmp].status_mutex);
 			return (1);
 		}
@@ -47,7 +48,9 @@ int	check_all_eaten(t_philo *p_data)
 	int	i;
 	int	fin_eat_num;
 
+	pthread_mutex_lock(&p_data->status_mutex);
 	p_num = p_data[0].num;
+	pthread_mutex_unlock(&p_data->status_mutex);
 	i = 0;
 	fin_eat_num = 0;
 	while (i < p_num)

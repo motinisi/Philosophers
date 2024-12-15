@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:55:21 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 17:08:23 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:46:38 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ void	philo_eat(t_philo *p_data)
 	p_data->last_eat_time = get_time() - base;
 	pthread_mutex_unlock(&p_data->status_mutex);
 	if (print_messege("is eating\n", p_data))
+	{
+		pthread_mutex_unlock(p_data->left_forks);
+		pthread_mutex_unlock(p_data->right_forks);
 		return ;
-	// printf("%lld %d is eating\n", get_time() - base, p_data->id);
-
+	}
 	usleep(1000 * p_data->eat_time);
 	pthread_mutex_lock(&p_data->status_mutex);
 	pthread_mutex_unlock(p_data->left_forks);
@@ -45,7 +47,6 @@ void	philo_sleep(t_philo *p_data)
 void	philo_think(t_philo *p_data)
 {
 	print_messege("is thinking\n", p_data);
-		// printf("%lld %d is thinking\n", get_time() - base, p_data->id);
 }
 
 void	stay_philo(t_philo *p_data)
@@ -61,18 +62,10 @@ void	stay_philo(t_philo *p_data)
 	pthread_mutex_unlock(&p_data->status_mutex);
 }
 
-int	status_check(t_philo *p_data, int eat_check)
+int	status_check(t_philo *p_data)
 {
 	pthread_mutex_lock(&p_data->status_mutex);
-	if (eat_check)
-	{
-		if (p_data->status == DIE || p_data->status == FIN)
-		{
-			pthread_mutex_unlock(&p_data->status_mutex);
-			return (1);
-		}
-	}
-	else if (p_data->status == DIE)
+	if (p_data->status == DIE || p_data->status == FIN)
 	{
 		pthread_mutex_unlock(&p_data->status_mutex);
 		return (1);
@@ -84,29 +77,27 @@ int	status_check(t_philo *p_data, int eat_check)
 void	*philo_routine(void *data)
 {
 	t_philo		*p_data;
-	// long long	base;
 
 
 	p_data = (t_philo *)data;
-	// base = p_data->start_time;
 	p_data->eat_count = 0;
 	if (p_data->num % 2 != 0)
 		stay_philo(p_data);
 	while (1)
 	{
 		pick_up_forks(p_data);
-		if (status_check(p_data, 0))
+		if (status_check(p_data))
+		{
+			pthread_mutex_unlock(p_data->left_forks);
+			pthread_mutex_unlock(p_data->right_forks);
 			return (0);
+		}
 		philo_eat(p_data);
-		// if (p_data->status == DIE || p_data->status == FIN)
-		if (status_check(p_data, 1))
+		if (status_check(p_data))
 			return (0);
-		// else
 		philo_sleep(p_data);
-		// if (p_data->status == DIE)
-		if (status_check(p_data, 0))
+		if (status_check(p_data))
 			return (0);
-		// else
 		philo_think(p_data);
 	}
 	return (0);
