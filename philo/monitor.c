@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:06:11 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 19:25:10 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:56:46 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ int	check_death(t_philo *p_data, int p_num)
 		if (present_time - p_data[i].last_eat_time > p_data[i].die_time
 			&& p_data->status != FIN)
 		{
-			p_data[i].status = DIE;
+			pthread_mutex_unlock(&p_data[i].status_mutex);
 			tmp = i;
 			i = -1;
 			while (++i < p_num)
+			{
+				pthread_mutex_lock(&p_data[i].status_mutex);
 				p_data[i].status = DIE;
-			printf("%lld %d died\n", present_time, p_data[tmp].id);
-			// print_messege("died\n", &p_data[tmp]);
-			pthread_mutex_unlock(&p_data[tmp].status_mutex);
+				pthread_mutex_unlock(&p_data[i].status_mutex);
+			}
+			print_messege("died\n", &p_data[tmp]);
 			return (1);
 		}
 		pthread_mutex_unlock(&p_data[i].status_mutex);
