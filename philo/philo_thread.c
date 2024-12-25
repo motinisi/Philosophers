@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:47:43 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 20:12:16 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/25 14:48:44 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_forks(pthread_mutex_t **forks, int p_all)
 {
-	size_t	i;
+	int	i;
 
 	*forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * p_all);
 	i = 0;

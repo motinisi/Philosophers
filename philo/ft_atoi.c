@@ -6,21 +6,21 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:15:03 by timanish          #+#    #+#             */
-/*   Updated: 2024/10/30 11:36:46 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/25 14:47:58 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static size_t	ft_strlen_n(const char *str)
-{
-	size_t	i;
+// static size_t	ft_strlen_n(const char *str)
+// {
+// 	size_t	i;
 
-	i = 0;
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-		i ++;
-	return (i);
-}
+// 	i = 0;
+// 	while (str[i] && str[i] >= '0' && str[i] <= '9')
+// 		i ++;
+// 	return (i);
+// }
 
 long	ft_atoi(const char *str)
 {

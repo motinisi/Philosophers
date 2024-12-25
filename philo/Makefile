@@ -6,12 +6,12 @@
 #    By: timanish <timanish@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/30 15:54:45 by timanish          #+#    #+#              #
-#    Updated: 2024/10/26 19:16:01 by timanish         ###   ########.fr        #
+#    Updated: 2024/12/25 14:47:22 by timanish         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFRAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -ggdb
 NAME = philo
 SRCS = 	main.c\
 		ft_atoi.c\
@@ -27,7 +27,7 @@ INCLUDES = -I includes
 all : $(NAME)
 
 $(NAME) :    $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+	$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 %.o:%.c
 	$(CC) $(INCLUDES) -c  $(CFLAGS) $< -o $@
 	
