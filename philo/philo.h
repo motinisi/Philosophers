@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 20:09:57 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/28 18:01:22 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ long			ft_atoi(const char *str);
 long long		get_time(void);
 int				print_messege(char *messege, t_philo *p_data);
 void			pick_up_forks(t_philo *p_data);
+int				pick_up_forks_when_three_philo(t_philo *p_data);
 void			philo_eat(t_philo *p_data);
 void			philo_sleep(t_philo *p_data);
 void			philo_think(t_philo *p_data);

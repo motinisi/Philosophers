@@ -6,7 +6,7 @@
 #    By: timanish <timanish@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/30 15:54:45 by timanish          #+#    #+#              #
-#    Updated: 2024/12/25 14:47:22 by timanish         ###   ########.fr        #
+#    Updated: 2024/12/28 17:53:46 by timanish         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = 	main.c\
 		routine.c\
 		monitor.c\
 		philo_utils.c\
+		philo_utils2.c\
 
 OBJS = $(SRCS:.c=.o)
 

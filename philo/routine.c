@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:55:21 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/15 20:11:59 by timanish         ###   ########.fr       */
+/*   Updated: 2024/12/28 18:04:07 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ void	stay_philo(t_philo *p_data)
 {
 	philo_think(p_data);
 	pthread_mutex_lock(&p_data->status_mutex);
-	if (p_data->id % 2 != 0)
-		usleep (1000 * (p_data->eat_time / (p_data->num / 2))
-			* (p_data->id / 2));
-	else
-		usleep(1000 * (p_data->eat_time + (p_data->eat_time / p_data->num)
-				* ((p_data->id - 1) / 2)));
+	if (p_data->num != 3)
+	{
+		if (p_data->id % 2 != 0)
+			usleep (1000 * (p_data->eat_time / (p_data->num / 2))
+				* (p_data->id / 2));
+		else
+			usleep(1000 * (p_data->eat_time + (p_data->eat_time / p_data->num)
+					* ((p_data->id - 1) / 2)));
+	}
 	pthread_mutex_unlock(&p_data->status_mutex);
 }
 
