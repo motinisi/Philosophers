@@ -6,12 +6,12 @@
 #    By: timanish <timanish@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/30 15:54:45 by timanish          #+#    #+#              #
-#    Updated: 2024/12/28 17:53:46 by timanish         ###   ########.fr        #
+#    Updated: 2025/03/15 20:50:30 by timanish         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -ggdb
+CFLAGS = -Wall -Wextra -Werror
 NAME = philo
 SRCS = 	main.c\
 		ft_atoi.c\

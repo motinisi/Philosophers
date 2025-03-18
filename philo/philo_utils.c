@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:15:16 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/28 17:54:17 by timanish         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:14:02 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,6 @@ int	print_messege(char *messege, t_philo *p_data)
 	pthread_mutex_unlock(&p_data->status_mutex);
 	return (0);
 }
-
-// void	pick_up_forks(t_philo *p_data)
-// {
-// 	if (p_data->num == 3)
-// 		pick_up_forks_when_three_philo (p_data);
-// 	else if (p_data->id % 2 == 0)
-// 	{
-// 		pthread_mutex_lock(p_data->left_forks);
-// 		if (print_messege("has taken a fork\n", p_data))
-// 			return ;
-// 		pthread_mutex_lock(p_data->right_forks);
-// 		if (print_messege("has taken a fork\n", p_data))
-// 			return ;
-// 	}
-// 	else
-// 	{
-// 		pthread_mutex_lock(p_data->right_forks);
-// 		if (print_messege("has taken a fork\n", p_data))
-// 			return ;
-// 		pthread_mutex_lock(p_data->left_forks);
-// 		if (print_messege("has taken a fork\n", p_data))
-// 			return ;
-// 	}
-// }
 
 int	argment_check(char **argv)
 {

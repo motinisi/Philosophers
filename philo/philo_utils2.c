@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:53:15 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/28 18:00:36 by timanish         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:14:58 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	pick_up_forks(t_philo *p_data)
 	if (p_data->num == 3)
 	{
 		if (pick_up_forks_when_three_philo(p_data))
-			return ;		
+			return ;
 	}
 	else if (p_data->id % 2 == 0)
 	{
