@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/28 18:01:22 by timanish         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:52:06 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ void			cleanup(pthread_t *p_pthread,
 					pthread_mutex_t *forks, t_philo *p_data);
 int				argment_check(char **argv);
 int				status_check(t_philo *p_data);
+void			stay_philo_even(t_philo *p_data);
 
 #endif

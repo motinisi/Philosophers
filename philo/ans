@@ -1,52 +1,51 @@
 0 1 has taken a fork
 0 1 has taken a fork
 0 1 is eating
-1 2 has taken a fork
-301 1 is sleeping
-301 2 has taken a fork
-301 2 is eating
-301 4 has taken a fork
-301 4 has taken a fork
-301 4 is eating
-601 1 is thinking
-601 2 is sleeping
-601 4 is sleeping
-601 1 has taken a fork
-601 1 has taken a fork
-601 1 is eating
-601 3 has taken a fork
-601 3 has taken a fork
-601 3 is eating
-901 2 is thinking
-901 2 has taken a fork
-901 2 has taken a fork
-901 2 is eating
-901 4 is thinking
-901 4 has taken a fork
-901 4 has taken a fork
-901 4 is eating
-901 1 is sleeping
-901 3 is sleeping
-1201 2 is sleeping
-1201 4 is sleeping
-1201 1 is thinking
-1201 1 has taken a fork
-1201 1 has taken a fork
-1201 1 is eating
-1201 3 is thinking
-1201 3 has taken a fork
-1201 3 has taken a fork
-1201 3 is eating
-1501 2 is thinking
-1501 4 is thinking
-1501 4 has taken a fork
-1501 3 is sleeping
-1501 4 has taken a fork
-1501 4 is eating
-1501 2 has taken a fork
-1501 2 has taken a fork
-1501 2 is eating
-1801 3 is thinking
-1801 3 has taken a fork
-1801 3 has taken a fork
-1801 3 is eating
+0 2 is thinking
+0 3 has taken a fork
+0 3 has taken a fork
+0 3 is eating
+1 4 is thinking
+1 5 has taken a fork
+1 5 has taken a fork
+1 5 is eating
+1 6 is thinking
+200 1 is sleeping
+200 3 is sleeping
+201 2 has taken a fork
+201 2 has taken a fork
+201 2 is eating
+201 5 is sleeping
+201 4 has taken a fork
+201 4 has taken a fork
+201 4 is eating
+201 6 has taken a fork
+201 6 has taken a fork
+201 6 is eating
+400 1 is thinking
+401 3 is thinking
+401 2 is sleeping
+401 3 has taken a fork
+401 5 is thinking
+401 4 is sleeping
+401 6 is sleeping
+401 5 has taken a fork
+401 5 has taken a fork
+401 5 is eating
+401 3 has taken a fork
+401 1 has taken a fork
+401 1 has taken a fork
+401 1 is eating
+401 3 is eating
+601 2 is thinking
+601 4 is thinking
+601 4 has taken a fork
+601 4 has taken a fork
+601 6 is thinking
+601 6 has taken a fork
+601 6 has taken a fork
+601 6 is eating
+601 4 is eating
+601 2 has taken a fork
+601 2 has taken a fork
+601 2 is eating
