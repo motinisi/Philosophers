@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:55:21 by timanish          #+#    #+#             */
-/*   Updated: 2024/12/28 18:04:07 by timanish         ###   ########.fr       */
+/*   Updated: 2025/03/23 18:56:00 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,23 @@ void	philo_think(t_philo *p_data)
 
 void	stay_philo(t_philo *p_data)
 {
-	philo_think(p_data);
-	pthread_mutex_lock(&p_data->status_mutex);
-	if (p_data->num != 3)
+	if (p_data->num % 2 != 0)
 	{
-		if (p_data->id % 2 != 0)
-			usleep (1000 * (p_data->eat_time / (p_data->num / 2))
-				* (p_data->id / 2));
-		else
-			usleep(1000 * (p_data->eat_time + (p_data->eat_time / p_data->num)
-					* ((p_data->id - 1) / 2)));
+		philo_think(p_data);
+		pthread_mutex_lock(&p_data->status_mutex);
+		if (p_data->num != 3)
+		{
+			if (p_data->id % 2 != 0)
+				usleep (1000 * (p_data->eat_time / (p_data->num / 2))
+					* (p_data->id / 2));
+			else
+				usleep(1000 * (p_data->eat_time + (p_data->eat_time
+							/ p_data->num) * ((p_data->id - 1) / 2)));
+		}
+		pthread_mutex_unlock(&p_data->status_mutex);
 	}
-	pthread_mutex_unlock(&p_data->status_mutex);
+	else
+		stay_philo_even(p_data);
 }
 
 void	*philo_routine(void *data)
@@ -70,8 +75,7 @@ void	*philo_routine(void *data)
 
 	p_data = (t_philo *)data;
 	p_data->eat_count = 0;
-	if (p_data->num % 2 != 0)
-		stay_philo(p_data);
+	stay_philo(p_data);
 	while (1)
 	{
 		pick_up_forks(p_data);
