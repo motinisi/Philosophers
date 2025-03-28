@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2025/03/18 16:52:06 by timanish         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:00:15 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ void			*philo_routine(void *data);
 int				check_death(t_philo *p_data, int p_num);
 int				check_all_eaten(t_philo *p_data);
 void			monitoring_philo(t_philo *p_data);
-int				init_philosophers(t_philo **p_data, int argc, char **argv,
+int				init_philosophers(t_philo **p_data, char **argv,
 					pthread_mutex_t **forks);
 void			create_philosopher_threads(pthread_t **p_pthread,
 					t_philo *p_data);
 void			join_philosopher_threads(pthread_t *p_pthread, t_philo *p_data);
 void			cleanup(pthread_t *p_pthread,
 					pthread_mutex_t *forks, t_philo *p_data);
-int				argment_check(char **argv);
+int				argment_check(char **argv, int argc);
 int				status_check(t_philo *p_data);
 void			stay_philo_even(t_philo *p_data);
 

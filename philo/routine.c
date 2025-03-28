@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:55:21 by timanish          #+#    #+#             */
-/*   Updated: 2025/03/18 16:51:26 by timanish         ###   ########.fr       */
+/*   Updated: 2025/03/23 18:56:00 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,6 @@ void	stay_philo(t_philo *p_data)
 	}
 	else
 		stay_philo_even(p_data);
-}
-
-void	stay_philo_even(t_philo *p_data)
-{
-	if (p_data->id % 2 == 0)
-	{
-		philo_think(p_data);
-		pthread_mutex_lock(&p_data->status_mutex);
-		if (p_data->id % 2 == 0)
-			usleep(1000 * (p_data->eat_time));
-		pthread_mutex_unlock(&p_data->status_mutex);
-	}
 }
 
 void	*philo_routine(void *data)

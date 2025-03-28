@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:15:16 by timanish          #+#    #+#             */
-/*   Updated: 2025/03/18 14:14:02 by timanish         ###   ########.fr       */
+/*   Updated: 2025/03/28 18:02:12 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,17 @@ int	print_messege(char *messege, t_philo *p_data)
 	return (0);
 }
 
-int	argment_check(char **argv)
+int	argment_check(char **argv, int argc)
 {
 	size_t	i;
 	long	flag;
 
 	i = 0;
+	if (argc < 5)
+	{
+		printf("argment error\n");
+		return (1);
+	}
 	while (argv[++i])
 	{
 		flag = ft_atoi(argv[i]);
@@ -79,5 +84,18 @@ void	cleanup(pthread_t *p_pthread, pthread_mutex_t *forks, t_philo *p_data)
 	}
 	free(p_pthread);
 	free(forks);
+	free(p_data->print_mutex);
 	free(p_data);
+}
+
+void	stay_philo_even(t_philo *p_data)
+{
+	if (p_data->id % 2 == 0)
+	{
+		philo_think(p_data);
+		pthread_mutex_lock(&p_data->status_mutex);
+		if (p_data->id % 2 == 0)
+			usleep(1000 * (p_data->eat_time));
+		pthread_mutex_unlock(&p_data->status_mutex);
+	}
 }
