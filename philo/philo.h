@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2025/03/18 17:00:15 by timanish         ###   ########.fr       */
+/*   Updated: 2025/03/30 22:08:26 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ long			ft_atoi(const char *str);
 long long		get_time(void);
 int				print_messege(char *messege, t_philo *p_data);
 void			pick_up_forks(t_philo *p_data);
-int				pick_up_forks_when_three_philo(t_philo *p_data);
+int				pickup_forks_for_edge_cases(t_philo *p_data);
 void			philo_eat(t_philo *p_data);
 void			philo_sleep(t_philo *p_data);
 void			philo_think(t_philo *p_data);
@@ -83,5 +83,6 @@ void			cleanup(pthread_t *p_pthread,
 int				argment_check(char **argv, int argc);
 int				status_check(t_philo *p_data);
 void			stay_philo_even(t_philo *p_data);
+int				one_philo_logic(t_philo *p_data);
 
 #endif
