@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nisi <nisi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:06:11 by timanish          #+#    #+#             */
-/*   Updated: 2025/03/30 22:00:24 by timanish         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:57:33 by nisi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ int	check_death(t_philo *p_data, int p_num)
 {
 	long long	present_time;
 	int			i;
-	int			tmp;
 
 	i = 0;
+	if (p_data->num == 1)
+		p_data->last_eat_time = 0;
 	while (i < p_num)
 	{
 		pthread_mutex_lock(&p_data[i].status_mutex);
@@ -53,7 +54,6 @@ int	check_death(t_philo *p_data, int p_num)
 			&& p_data->status != FIN)
 		{
 			pthread_mutex_unlock(&p_data[i].status_mutex);
-			tmp = i;
 			set_all_die(p_data, p_num);
 			pthread_mutex_lock(p_data->print_mutex);
 			printf("%lld %d %s", get_time() - p_data->start_time,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nisi <nisi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:15:16 by timanish          #+#    #+#             */
-/*   Updated: 2025/03/28 18:14:12 by timanish         ###   ########.fr       */
+/*   Updated: 2025/04/02 01:10:38 by nisi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	argment_check(char **argv, int argc)
 	while (argv[++i])
 	{
 		flag = ft_atoi(argv[i]);
-		if (flag < 0)
+		if (flag <= 0)
 		{
 			printf("philo_number is incorect\n");
 			return (1);
