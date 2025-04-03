@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nisi <nisi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:53:15 by timanish          #+#    #+#             */
-/*   Updated: 2025/04/02 01:08:04 by nisi             ###   ########.fr       */
+/*   Updated: 2025/04/03 22:03:51 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	pickup_forks_for_edge_cases(t_philo *p_data)
 
 int	one_philo_logic(t_philo *p_data)
 {
-	while(p_data->status != DIE)
+	while (p_data->status != DIE)
 	{
 		usleep(1000);
 	}
