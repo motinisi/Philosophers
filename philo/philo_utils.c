@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nisi <nisi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:15:16 by timanish          #+#    #+#             */
-/*   Updated: 2025/04/02 01:10:38 by nisi             ###   ########.fr       */
+/*   Updated: 2025/04/04 22:25:24 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	argment_check(char **argv, int argc)
 	long	flag;
 
 	i = 0;
-	if (argc < 5)
+	if (!(argc == 5 || argc == 6))
 	{
 		printf("argment error\n");
 		return (1);

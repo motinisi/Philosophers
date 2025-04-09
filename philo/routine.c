@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nisi <nisi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:55:21 by timanish          #+#    #+#             */
-/*   Updated: 2025/04/02 00:19:17 by nisi             ###   ########.fr       */
+/*   Updated: 2025/04/09 16:49:59 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	philo_think(t_philo *p_data)
 
 void	stay_philo(t_philo *p_data)
 {
+	p_data->eat_count = 0;
 	if (p_data->num % 2 != 0)
 	{
 		philo_think(p_data);
@@ -74,12 +75,13 @@ void	*philo_routine(void *data)
 	t_philo		*p_data;
 
 	p_data = (t_philo *)data;
-	p_data->eat_count = 0;
 	if (p_data->num != 1)
 		stay_philo(p_data);
 	while (1)
 	{
 		pick_up_forks(p_data);
+		if (p_data->num == 1)
+			return (0);
 		if (status_check(p_data))
 		{
 			pthread_mutex_unlock(p_data->left_forks);

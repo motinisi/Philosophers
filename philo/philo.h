@@ -6,7 +6,7 @@
 /*   By: timanish <timanish@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:58:09 by timanish          #+#    #+#             */
-/*   Updated: 2025/03/30 22:08:26 by timanish         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:47:08 by timanish         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int				argment_check(char **argv, int argc);
 int				status_check(t_philo *p_data);
 void			stay_philo_even(t_philo *p_data);
 int				one_philo_logic(t_philo *p_data);
+void			stay_philo(t_philo *p_data);
 
 #endif
